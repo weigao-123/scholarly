@@ -70,7 +70,7 @@ class _SearchScholarIterator(object):
             match = re.match(pattern=r'(^|\s*About)\s*([0-9,\.\s’]+)', string=x.text)
             if match:
                 return int(re.sub(pattern=r'[,\.\s’]',repl='', string=match.group(2)))
-        return 0
+        return len(self._rows)
 
     # Iterator protocol
 
