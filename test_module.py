@@ -653,7 +653,7 @@ class TestScholarlyWithProxy(unittest.TestCase):
         """
         Test that searching for an empty publication returns zero results
         """
-        pubs = [p for p in scholarly.search_pubs('Perception of physical stability and center of mass of 3D objects')]
+        pubs = [p for p in scholarly.search_pubs('')]
         self.assertIs(len(pubs), 0)
 
     def test_search_pubs_citedby(self):
