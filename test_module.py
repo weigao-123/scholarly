@@ -718,6 +718,23 @@ class TestScholarlyWithProxy(unittest.TestCase):
         titles = [p['bib']['title'] for p in pubs]
         self.assertIn('Visual perception of the physical stability of asymmetric three-dimensional objects', titles)
 
+    def test_search_pubs_single_pub(self):
+        """
+        As of Jun 24, 2024 there are is only one pub that fits the search term:
+        [Perception of physical stability and center of mass of 3D objects].
+
+        Check that it returns a proper result and the total results for that search term is equal to 1.
+        """
+        pub = scholarly.search_single_pub("Perception of physical stability and center of mass of 3D objects")
+        pubs = list(scholarly.search_pubs("Perception of physical stability and center of mass of 3D objects"))
+        # Check that the first entry in pubs is the same as pub.
+        # Checking for quality holds for non-dict entries only.
+        for key in {'author_id', 'pub_url', 'num_citations'}:
+            self.assertEqual(pub[key], pubs[0][key])
+        for key in {'title', 'pub_year', 'venue'}:
+            self.assertEqual(pub['bib'][key], pubs[0]['bib'][key])
+        self.assertEqual(len(pubs), 1)
+
     def test_search_pubs_total_results(self):
         """
         As of September 16, 2021 there are 32 pubs that fit the search term:
