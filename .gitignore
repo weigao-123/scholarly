@@ -28,3 +28,5 @@ vic.py
 .vscode/settings.json
 test.py
 *.swp
+
+.specstory
